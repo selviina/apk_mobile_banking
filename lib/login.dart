@@ -11,6 +11,9 @@ class myApp extends StatefulWidget {
 }
 
 class _myAppState extends State<myApp> {
+  late String Username;
+  late String Password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,11 +56,17 @@ class _myAppState extends State<myApp> {
                     children: [
                       Text('Username'),
                       TextFormField(
+                          onChanged: (value) {
+                            Username = value;
+                          },
                           decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                      )),
+                            border: OutlineInputBorder(),
+                          )),
                       Text('Password'),
                       TextFormField(
+                        onChanged: (value) {
+                          Password = value;
+                        },
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
@@ -71,11 +80,14 @@ class _myAppState extends State<myApp> {
                           width: 200.0,
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => dashboard()),
-                              );
+                              if (Username == '2015051077' &&
+                                  Password == '2015051077') {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => dashboard()),
+                                );
+                              }
                             },
                             child: Text('Login'),
                           ),

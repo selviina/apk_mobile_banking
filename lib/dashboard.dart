@@ -45,9 +45,9 @@ class _dashboardState extends State<dashboard> {
                     children: [
                       Container(
                         child: Image(
-                          image: AssetImage('assets/images/logo-undiksha.png'),
-                          width: 100,
-                          height: 100,
+                          image: AssetImage('assets/images/mypict.jpeg'),
+                          width: 180,
+                          height: 180,
                         ),
                       ),
                       Container(
@@ -56,7 +56,7 @@ class _dashboardState extends State<dashboard> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              width: 300,
+                              width: 150,
                               padding: EdgeInsets.all(20.0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.0),
@@ -78,7 +78,7 @@ class _dashboardState extends State<dashboard> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                    width: 300,
+                                    width: 150,
                                     padding: EdgeInsets.all(20.0),
                                     decoration: BoxDecoration(
                                         borderRadius:
