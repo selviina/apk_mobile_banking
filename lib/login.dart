@@ -1,21 +1,27 @@
 import 'dart:ui';
 
+import 'package:apk_mobile_banking/dashboard.dart';
 import 'package:flutter/material.dart';
 
-class myApp extends StatelessWidget {
+class myApp extends StatefulWidget {
   const myApp({Key? key}) : super(key: key);
 
   @override
+  State<myApp> createState() => _myAppState();
+}
+
+class _myAppState extends State<myApp> {
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: const Text('Koperasi Undiksha'),
-          centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 10, 7, 139),
-        ),
-        body: SafeArea(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Koperasi Undiksha'),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 10, 7, 139),
+      ),
+      body: SingleChildScrollView(
+        child: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Column(
@@ -28,6 +34,9 @@ class myApp extends StatelessWidget {
                   ),
                   alignment: Alignment.topCenter,
                   padding: EdgeInsets.only(top: 50.0),
+                ),
+                SizedBox(
+                  height: 20.0,
                 ),
                 Container(
                   padding: EdgeInsets.all(20.0),
@@ -54,17 +63,48 @@ class myApp extends StatelessWidget {
                         ),
                       ),
                       // Spacer(),
+                      SizedBox(
+                        height: 20.0,
+                      ),
                       Center(
                         child: Container(
                           width: 200.0,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => dashboard()),
+                              );
+                            },
                             child: Text('Login'),
                           ),
                         ),
-                      )
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('Daftar MBanking'),
+                          ),
+                          TextButton(
+                              onPressed: () {}, child: Text('Lupa Password?'))
+                        ],
+                      ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 120,
+                ),
+                Container(
+                  child: Center(
+                      child: Text('Copyright @2022 by Selvina',
+                          style: TextStyle(fontWeight: FontWeight.bold))),
+                  width: double.infinity,
+                  height: 50.0,
+                  color: Color.fromARGB(255, 114, 142, 228),
                 ),
               ],
             ),
@@ -74,16 +114,3 @@ class myApp extends StatelessWidget {
     );
   }
 }
-
-   
-          //  body: Padding(
-          //       padding: const EdgeInsets.all(8.0),
-          //       child: Form(
-          //           child: Column(children: <Widget>[
-          //         TextFormField(
-          //           decoration: InputDecoration(hintText: "Username"),
-          //         ),
-          //         TextFormField(
-          //           obscureText: true,
-          //           decoration: InputDecoration(hintText: "Password"),
-          //         ),

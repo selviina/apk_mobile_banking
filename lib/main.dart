@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'dashboard.dart';
 
 void main() {
-  runApp(const myApp());
+  runApp(MaterialApp(
+    home: myApp(),
+  ));
 }
 
 
