@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:apk_mobile_banking/dashboard.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 class myApp extends StatefulWidget {
   const myApp({Key? key}) : super(key: key);
@@ -77,7 +78,7 @@ class _myAppState extends State<myApp> {
                       ),
                       Center(
                         child: Container(
-                          width: 200.0,
+                          width: MediaQuery.of(context).size.height * 0.2,
                           child: ElevatedButton(
                             onPressed: () {
                               if (Username == '2015051077' &&
