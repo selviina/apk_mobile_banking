@@ -83,7 +83,7 @@ class _myAppState extends State<myApp> {
                             onPressed: () {
                               if (Username == '2015051077' &&
                                   Password == '2015051077') {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => dashboard()),

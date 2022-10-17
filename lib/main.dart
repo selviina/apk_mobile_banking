@@ -5,9 +5,7 @@ import 'tombol.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: myApp(),
-  ));
+  runApp(MaterialApp(home: myApp(), debugShowCheckedModeBanner: false));
 }
 
 class MyApp extends StatelessWidget {
