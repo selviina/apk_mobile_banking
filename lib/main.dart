@@ -3,6 +3,7 @@ import 'login.dart';
 import 'dashboard.dart';
 import 'tombol.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:apk_mobile_banking/scanner.dart';
 
 void main() {
   runApp(MaterialApp(home: myApp(), debugShowCheckedModeBanner: false));

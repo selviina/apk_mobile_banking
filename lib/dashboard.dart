@@ -1,4 +1,6 @@
 import 'package:apk_mobile_banking/mobileView.dart';
+import 'package:apk_mobile_banking/model/list_users_model.dart';
+import 'package:apk_mobile_banking/scanner.dart';
 import 'package:apk_mobile_banking/tabletView.dart';
 import 'package:apk_mobile_banking/tombol.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:vector_math/vector_math_operations.dart';
 
 class dashboard extends StatefulWidget {
-  const dashboard({Key? key}) : super(key: key);
+  final ListUsersModel user;
+  const dashboard({Key? key, required this.user}) : super(key: key);
 
   @override
   State<dashboard> createState() => _dashboardState();
@@ -28,7 +31,7 @@ class _dashboardState extends State<dashboard> {
         if (constraints.maxWidth > 480) {
           return TabletView();
         } else {
-          return MobileView();
+          return MobileView(user: widget.user);
         }
       }),
       bottomNavigationBar: BottomNavigationBar(
@@ -51,7 +54,12 @@ class _dashboardState extends State<dashboard> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF1C2474),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => QrScanner()),
+          );
+        },
         child: Container(
           margin: EdgeInsets.all(15.0),
           child: Icon(Icons.qr_code_scanner),

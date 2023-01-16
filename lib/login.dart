@@ -1,8 +1,12 @@
 import 'dart:ui';
 
 import 'package:apk_mobile_banking/dashboard.dart';
+import 'package:apk_mobile_banking/register.dart';
+import 'package:apk_mobile_banking/service/list_users_service.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+
+import 'model/list_users_model.dart';
 
 class myApp extends StatefulWidget {
   const myApp({Key? key}) : super(key: key);
@@ -12,8 +16,8 @@ class myApp extends StatefulWidget {
 }
 
 class _myAppState extends State<myApp> {
-  late String Username;
-  late String Password;
+  String Username = "";
+  String Password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +48,7 @@ class _myAppState extends State<myApp> {
                 ),
                 Container(
                   padding: EdgeInsets.all(20.0),
+                  alignment: Alignment.center,
                   // height: 100.0,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -56,22 +61,36 @@ class _myAppState extends State<myApp> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Username'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       TextFormField(
                           onChanged: (value) {
                             Username = value;
                           },
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
+                            hintText: "Masukkan Username",
+                            prefixIcon: Icon(Icons.account_circle_outlined),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
                           )),
-                      Text('Password'),
-                      TextFormField(
-                        onChanged: (value) {
-                          Password = value;
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
+                      SizedBox(
+                        height: 20.0,
                       ),
+                      Text('Password'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          onChanged: (value) {
+                            Password = value;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Masukkan Password",
+                            prefixIcon: Icon(Icons.lock),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                          )),
                       // Spacer(),
                       SizedBox(
                         height: 20.0,
@@ -80,15 +99,16 @@ class _myAppState extends State<myApp> {
                         child: Container(
                           width: MediaQuery.of(context).size.height * 0.2,
                           child: ElevatedButton(
-                            onPressed: () {
-                              if (Username == '2015051077' &&
-                                  Password == '2015051077') {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => dashboard()),
-                                );
-                              }
+                            onPressed: () async {
+                              ListUsersService _service = ListUsersService();
+                              ListUsersModel user =
+                                  await _service.postLogin(Username, Password);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        dashboard(user: user)),
+                              );
                             },
                             child: Text('Login'),
                           ),
@@ -98,7 +118,12 @@ class _myAppState extends State<myApp> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegisterPage()));
+                            },
                             child: Text('Daftar MBanking'),
                           ),
                           TextButton(
@@ -110,6 +135,7 @@ class _myAppState extends State<myApp> {
                 ),
                 SizedBox(
                   height: 120,
+                  width: 200,
                 ),
                 Container(
                   child: Center(
@@ -117,7 +143,7 @@ class _myAppState extends State<myApp> {
                           style: TextStyle(fontWeight: FontWeight.bold))),
                   width: double.infinity,
                   height: 50.0,
-                  color: Color.fromARGB(255, 114, 142, 228),
+                  color: Color.fromARGB(255, 68, 122, 239),
                 ),
               ],
             ),

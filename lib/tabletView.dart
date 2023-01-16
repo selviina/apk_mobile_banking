@@ -32,7 +32,7 @@ class _TabletViewState extends State<TabletView> {
                           });
                         }),
                         child: Image.asset(
-                          'assets/images/mypict.jpeg',
+                          'assets/images/logo-undiksha.png',
                         ),
                       ),
                     ),
