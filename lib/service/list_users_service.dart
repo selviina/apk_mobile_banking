@@ -27,11 +27,43 @@ class ListUsersService {
     }
   }
 
-  postPenarikan(int user_id, double jumlah_setoran) async {
+  PostTransfer(
+      int id_pengirim, double jumlah_transfer, String nomor_rekening) async {
+    String url = 'http://apikoperasi.rey1024.com/transfer';
+    final Response response;
+    FormData formData = FormData.fromMap({
+      "id_pengirim": id_pengirim,
+      "jumlah_transfer": jumlah_transfer,
+      "nomor_rekening": nomor_rekening
+    });
+    try {
+      response = await dio.post(url, data: formData);
+    } catch (e) {
+      print('gagal');
+    }
+  }
+
+  postPenarikan(int user_id, double jumlah_tarikan) async {
     String url = 'http://apikoperasi.rey1024.com/tarikan';
     final Response response;
     FormData formData = FormData.fromMap(
-        {"user_id": user_id, "jumlah_setoran": jumlah_setoran});
+        {"user_id": user_id, "jumlah_tarikan": jumlah_tarikan});
+    try {
+      response = await dio.post(
+        url,
+        data: formData,
+      );
+      print('Berhasil');
+    } catch (e) {
+      print('Gagal');
+    }
+  }
+
+  postSetoran(int user_id, double jumlah_setoran) async {
+    String url = 'http://apikoperasi.rey1024.com/setoran';
+    final Response response;
+    FormData formData = FormData.fromMap(
+        {"user_id": user_id, "jumlah_tarikan": jumlah_setoran});
     try {
       response = await dio.post(
         url,

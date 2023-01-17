@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Transfer extends StatefulWidget {
-  const Transfer({Key? key}) : super(key: key);
+class Setoran extends StatefulWidget {
+  const Setoran({Key? key}) : super(key: key);
 
   @override
-  State<Transfer> createState() => _TransferState();
+  State<Setoran> createState() => _SetoranState();
 }
 
-class _TransferState extends State<Transfer> {
+class _SetoranState extends State<Setoran> {
   String nama_penerima = "";
   String nomor_rekening_penerima = "";
   String jumlah_transfer = "";

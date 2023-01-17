@@ -16,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController EmailController = TextEditingController();
   TextEditingController PasswordController = TextEditingController();
   TextEditingController NamaController = TextEditingController();
+  TextEditingController NIMController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 borderRadius: BorderRadius.circular(8.0)),
                           )),
                       SizedBox(
-                        height: 20.0,
+                        height: 15.0,
                       ),
                       Text('Password'),
                       SizedBox(
@@ -85,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           )),
                       // Spacer(),
                       SizedBox(
-                        height: 20.0,
+                        height: 15.0,
                       ),
                       Text('Nama'),
                       SizedBox(
@@ -95,6 +96,21 @@ class _RegisterPageState extends State<RegisterPage> {
                           controller: NamaController,
                           decoration: InputDecoration(
                             hintText: "Masukkan Nama",
+                            prefixIcon: Icon(Icons.person),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0)),
+                          )),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Text('NIM'),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextFormField(
+                          controller: NIMController,
+                          decoration: InputDecoration(
+                            hintText: "Masukkan NIM",
                             prefixIcon: Icon(Icons.person),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8.0)),
