@@ -36,9 +36,7 @@ class _QrScannerState extends State<QrScanner> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        ElevatedButton(onPressed: () => _scan(), child: Text('scan')),
-        // ElevatedButton (child: Text ("Scan Barcode")),
-        // onPressed: ()=>_scan(),
+        ElevatedButton(onPressed: () => _scan(), child: Text('Scan')),
         TextButton(
           onPressed: () {
             _launchUrl();
