@@ -10,9 +10,9 @@ class Transfer extends StatefulWidget {
 }
 
 class _TransferState extends State<Transfer> {
-  String nama_penerima = "";
-  String nomor_rekening_penerima = "";
-  String jumlah_transfer = "";
+  TextEditingController nomor_rekeningController = TextEditingController();
+  TextEditingController jumlah_setoranController = TextEditingController();
+  String user_id;
 
   @override
   Widget build(BuildContext context) {
@@ -20,62 +20,42 @@ class _TransferState extends State<Transfer> {
       appBar: AppBar(
         title: Text('Setoran'),
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Nama Penerima'),
-                SizedBox(
-                  height: 10.0,
-                ),
-                TextFormField(
-                    decoration: InputDecoration(
-                  hintText: "Masukkan Nama Penerima",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                )),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text('Nomor Rekening Penerima'),
-                SizedBox(
-                  height: 10.0,
-                ),
-                TextFormField(
-                    decoration: InputDecoration(
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+                controller: nomor_rekeningController,
+                decoration: InputDecoration(
                   hintText: "Masukkan Nomor Rekening",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0)),
                 )),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text('Jumlah Transfer'),
-                SizedBox(
-                  height: 10.0,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Masukkan Nominal Transfer",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
-                  ),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      ListUsersService _service = ListUsersService();
-                      _service.transfer(
-                          int.parse(userModel.user_id.toString()),
-                          double.parse(jumlah_setorancontroller.text),
-                          nomor_rekeningcontroller.text);
-                    },
-                    child: Text("Transfer"))
-              ],
+            SizedBox(
+              height: 10.0,
             ),
-          ),
+            Text('Jumlah Transfer'),
+            SizedBox(
+              height: 10.0,
+            ),
+            TextField(
+              controller: jumlah_setoranController,
+              decoration: InputDecoration(
+                hintText: "Masukkan Nominal Transfer",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0)),
+              ),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  ListUsersService _service = ListUsersService();
+                  _service.transfer(
+                      int.parse(ListUsersModel.user_id.toString()),
+                      double.parse(jumlah_setoranController.text),
+                      nomor_rekeningController.text);
+                },
+                child: Text("Transfer"))
+          ],
         ),
       ),
     );

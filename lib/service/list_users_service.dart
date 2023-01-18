@@ -43,7 +43,7 @@ class ListUsersService {
     }
   }
 
-  postPenarikan(int user_id, double jumlah_tarikan) async {
+  postTarikan(int user_id, double jumlah_tarikan) async {
     String url = 'http://apikoperasi.rey1024.com/tarikan';
     final Response response;
     FormData formData = FormData.fromMap(
@@ -63,7 +63,7 @@ class ListUsersService {
     String url = 'http://apikoperasi.rey1024.com/setoran';
     final Response response;
     FormData formData = FormData.fromMap(
-        {"user_id": user_id, "jumlah_tarikan": jumlah_setoran});
+        {"user_id": user_id, "jumlah_setoran": jumlah_setoran});
     try {
       response = await dio.post(
         url,
@@ -125,4 +125,8 @@ class ListUsersService {
       return postLogin(username, password);
     }
   }
+
+  setorSaldo(int parse, double parse2) {}
+
+  void transfer(int parse, double parse2, text) {}
 }
