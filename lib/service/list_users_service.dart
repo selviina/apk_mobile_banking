@@ -75,11 +75,12 @@ class ListUsersService {
     }
   }
 
-  postRegister(String username, String password, String nama) async {
+  postRegister(
+      String username, String password, String nama, String nim) async {
     String url = 'http://apikoperasi.rey1024.com/register';
     final Response response;
     FormData formData = FormData.fromMap(
-        {"username": username, "password": password, "nama": nama});
+        {"username": username, "password": password, "nama": nama, "nim": nim});
     // {"username": username, "password": password};
 
     // dio.options.headers['Authentication'] = 'Bearer $token'
@@ -93,7 +94,7 @@ class ListUsersService {
       final data = response.data;
       print(data['Berhasil']);
     } else {
-      return postRegister(username, password, nama);
+      return postRegister(username, password, nama, nim);
     }
   }
 

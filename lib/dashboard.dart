@@ -1,3 +1,4 @@
+import 'package:apk_mobile_banking/main.dart';
 import 'package:apk_mobile_banking/mobileView.dart';
 import 'package:apk_mobile_banking/model/list_users_model.dart';
 import 'package:apk_mobile_banking/scanner.dart';
@@ -25,7 +26,14 @@ class _dashboardState extends State<dashboard> {
         title: const Text('Koperasi Undiksha'),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 10, 7, 139),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.logout))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => MyApp()));
+              },
+              icon: Icon(Icons.logout))
+        ],
       ),
       body: LayoutBuilder(builder: (context, constraints) {
         if (constraints.maxWidth > 480) {
@@ -43,8 +51,8 @@ class _dashboardState extends State<dashboard> {
         iconSize: 30,
         items: [
           BottomNavigationBarItem(
-            label: "Setting",
-            icon: Icon(Icons.settings),
+            label: "Dashboard",
+            icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
             label: "Profile",

@@ -128,7 +128,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               ListUsersModel user = await _service.postRegister(
                                   EmailController.text,
                                   PasswordController.text,
-                                  NamaController.text);
+                                  NamaController.text,
+                                  NIMController.text);
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(

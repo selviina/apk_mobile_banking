@@ -80,7 +80,7 @@ class _TarikanState extends State<Tarikan> {
 
   tarikSaldo(String? user_id, String jumlah_tarikan) async {
     ListUsersService _service = ListUsersService();
-    await _service.tarikSaldo(
+    await _service.postTarikan(
         int.parse(user_id!), double.parse(jumlah_tarikan));
     setState(() {
       tarikanLoading = false;

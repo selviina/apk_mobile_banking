@@ -3,8 +3,8 @@ import 'package:apk_mobile_banking/service/list_users_service.dart';
 import 'package:apk_mobile_banking/model/list_users_model.dart';
 
 class Transfer extends StatefulWidget {
-  const Transfer({Key? key}) : super(key: key);
-
+  const Transfer({Key? key, required this.user}) : super(key: key);
+  final ListUsersModel user;
   @override
   State<Transfer> createState() => _TransferState();
 }
@@ -48,8 +48,8 @@ class _TransferState extends State<Transfer> {
             ElevatedButton(
                 onPressed: () {
                   ListUsersService _service = ListUsersService();
-                  _service.transfer(
-                      int.parse(ListUsersModel.user_id.toString()),
+                  _service.PostTransfer(
+                      int.parse(widget.user.user_id.toString()),
                       double.parse(jumlah_setoranController.text),
                       nomor_rekeningController.text);
                 },
