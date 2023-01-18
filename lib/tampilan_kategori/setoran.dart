@@ -1,67 +1,88 @@
 import 'package:flutter/material.dart';
+import 'package:apk_mobile_banking/service/list_users_service.dart';
+import 'package:apk_mobile_banking/model/list_users_model.dart';
 
 class Setoran extends StatefulWidget {
-  const Setoran({Key? key}) : super(key: key);
+  final ListUsersModel user;
+
+  const Setoran({Key? key, required this.user}) : super(key: key);
 
   @override
-  State<Setoran> createState() => _SetoranState();
+  State<Setoran> createState() => _Setoranstate();
 }
 
-class _SetoranState extends State<Setoran> {
-  String nama_penerima = "";
-  String nomor_rekening_penerima = "";
-  String jumlah_transfer = "";
+class _Setoranstate extends State<Setoran> {
+  TextEditingController jumlahSetoranController = TextEditingController();
+  bool setorLoading = false;
+  int counter = 0;
+
+  confirmDialog(String? user_id, String jumlah_setoran) {
+    showDialog(
+      context: (context),
+      builder: (_) => AlertDialog(
+        title: Text('Apa Anda Yakin?'),
+        actions: [
+          (setorLoading)
+              ? CircularProgressIndicator()
+              : ElevatedButton(
+                  onPressed: () async {
+                    setState(() {
+                      setorLoading = true;
+                    });
+                    await setorSaldo(user_id, jumlah_setoran);
+                    Navigator.pop(context);
+                  },
+                  child: Text('Ya'),
+                ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Setoran'),
+      appBar: AppBar(
+        title: Text('Setor'),
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 8,
+              child: Column(
+                children: [
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    controller: jumlahSetoranController,
+                    decoration: InputDecoration(labelText: "Jumlah Setoran"),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: ElevatedButton(
+                onPressed: () {
+                  confirmDialog(
+                      widget.user.user_id, jumlahSetoranController.text);
+                },
+                child: Text('Setor'),
+              ),
+            ),
+          ],
         ),
-        body: SingleChildScrollView(
-            child: SafeArea(
-                child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Nama Penerima'),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        TextFormField(
-                            decoration: InputDecoration(
-                          hintText: "Masukkan Nama Penerima",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                        )),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Text('Nomor Rekening Penerima'),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        TextFormField(
-                            decoration: InputDecoration(
-                          hintText: "Masukkan Nomor Rekening",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                        )),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Text('Jumlah Transfer'),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        TextFormField(
-                            decoration: InputDecoration(
-                          hintText: "Masukkan Nominal Transfer",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                        )),
-                      ],
-                    )))));
+      ),
+    );
+  }
+
+  setorSaldo(String? user_id, String jumlah_setoran) async {
+    ListUsersService _service = ListUsersService();
+    await _service.setorSaldo(
+        int.parse(user_id!), double.parse(jumlah_setoran));
+    setState(() {
+      setorLoading = false;
+    });
   }
 }

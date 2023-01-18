@@ -141,7 +141,9 @@ class MobileView extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Tarikan()),
+                                    builder: (context) => Tarikan(
+                                          user: user,
+                                        )),
                               );
                             },
                           ),
@@ -152,7 +154,7 @@ class MobileView extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Setoran()),
+                                    builder: (context) => Setoran(user: user)),
                               );
                             },
                           ),
