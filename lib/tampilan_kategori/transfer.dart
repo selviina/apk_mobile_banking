@@ -12,7 +12,6 @@ class Transfer extends StatefulWidget {
 class _TransferState extends State<Transfer> {
   TextEditingController nomor_rekeningController = TextEditingController();
   TextEditingController jumlah_setoranController = TextEditingController();
-  String user_id;
 
   @override
   Widget build(BuildContext context) {
