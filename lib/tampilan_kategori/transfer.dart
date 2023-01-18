@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:apk_mobile_banking/service/list_users_service.dart';
 import 'package:apk_mobile_banking/model/list_users_model.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class Transfer extends StatefulWidget {
   const Transfer({Key? key, required this.user}) : super(key: key);
@@ -52,11 +53,52 @@ class _TransferState extends State<Transfer> {
                       int.parse(widget.user.user_id.toString()),
                       double.parse(jumlah_setoranController.text),
                       nomor_rekeningController.text);
+                  showNotification();
                 },
                 child: Text("Transfer"))
           ],
         ),
       ),
     );
+  }
+
+  showNotification() async {
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const DarwinInitializationSettings initializationSettingsIOS =
+        DarwinInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+    );
+
+    AndroidNotificationChannel channel = const AndroidNotificationChannel(
+      'high channel',
+      'Very important notification!!',
+      description: 'the first notification',
+      importance: Importance.max,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+        1,
+        'Undiksha Banking',
+        'Transfer Berhasil',
+        NotificationDetails(
+          android: AndroidNotificationDetails(channel.id, channel.name,
+              channelDescription: channel.description),
+        ));
   }
 }
