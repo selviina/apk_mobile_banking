@@ -69,6 +69,8 @@ class ListUsersService {
         url,
         data: formData,
       );
+      print(user_id);
+      print(jumlah_setoran);
       print('Berhasil');
     } catch (e) {
       print('Gagal');

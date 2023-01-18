@@ -79,7 +79,7 @@ class _Setoranstate extends State<Setoran> {
 
   setorSaldo(String? user_id, String jumlah_setoran) async {
     ListUsersService _service = ListUsersService();
-    await _service.setorSaldo(
+    await _service.postSetoran(
         int.parse(user_id!), double.parse(jumlah_setoran));
     setState(() {
       setorLoading = false;
